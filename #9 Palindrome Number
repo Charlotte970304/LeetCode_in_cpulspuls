@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)
+            return false;
+        return is_Palindromic(inttostr(x));
+    }
+    string inttostr(int n)
+    {
+        string str="";
+        while(n!=0)
+        {
+            str=(char)((n%10)+48)+str;
+            n/=10;
+        }
+        return str;
+    }
+    bool is_Palindromic(string str){
+        for (int i=0; i<(str.length()/2); i++)
+        {
+            if(str[i] != str[str.length()-i-1])
+                return false;
+        }
+        return true;
+    }
+};
