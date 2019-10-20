@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int ascii[256];
+        int ans=0;
+        for(int i=0;i<s.length();i++)
+        {
+            int len=1;
+            memset(ascii, 0, sizeof(ascii));
+            ascii[int(s[i])]=1;
+            for(int j=i+1;j<s.length();j++)
+            {
+                if(ascii[int(s[j])])
+                {
+                    if(len>ans)
+                        ans=len;
+                    break;
+                }
+                ascii[int(s[j])]=1;
+                len++;
+                if(j==s.length()-1&&len>ans)
+                    ans=len;
+            }
+        }
+        if(ans==0)
+            ans=s.length();
+        return ans;
+    }
+    
+};
