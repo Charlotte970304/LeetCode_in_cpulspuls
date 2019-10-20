@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+        bool flag = true;//true is positive
+        bool enter=false;
+        int ans=0;
+        for(int i=0;i<str.length();i++)
+        {
+            if(enter&&str[i]<48||str[i]>57)
+                break;
+            if(str[i]=='-')
+            {
+                flag=false;
+                if(str[i+1]<48||str[i+1]>57)
+                    return 0;
+            }
+            else if(str[i]=='+')
+            {
+                flag=true;
+                if(str[i+1]<48||str[i+1]>57)
+                    return 0;
+            }
+            else if(str[i]==' ')
+                continue;
+            else if(str[i]<48||str[i]>57)
+                return ans;
+            else
+            {
+                enter=true;
+                if(ans>214748364&&flag||(ans==214748364&&str[i]>'6'&&flag))
+                    return 2147483647;
+                else if(ans>214748364&&!flag||(ans==214748364&&str[i]>'7'&&!flag))
+                    return -2147483648;
+                else
+                    ans=ans*10+(str[i]-48);
+            }      
+        }
+        if(!flag)
+            ans=-ans;
+        return ans;
+    }
+};
